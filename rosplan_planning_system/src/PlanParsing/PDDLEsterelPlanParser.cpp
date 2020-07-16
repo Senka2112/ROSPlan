@@ -57,6 +57,8 @@ namespace KCL_rosplan {
 	}
 
 	void PDDLEsterelPlanParser::publishPlan() {
+        last_plan.header.stamp = ros::Time::now();
+        
 		plan_publisher.publish(last_plan);
 	}
 
