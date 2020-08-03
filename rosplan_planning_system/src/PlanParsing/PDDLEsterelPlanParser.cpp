@@ -12,6 +12,8 @@ namespace KCL_rosplan {
         epsilon_time = 0.1;
 		node_handle->getParam("epsilon_time", epsilon_time);
 
+        seq = 0;
+
 		// fetching problem info for TILs
 		std::string kb = "knowledge_base";
 		node_handle->getParam("knowledge_base", kb);
@@ -58,6 +60,9 @@ namespace KCL_rosplan {
 
 	void PDDLEsterelPlanParser::publishPlan() {
         last_plan.header.stamp = ros::Time::now();
+        last_plan.header.seq = seq;
+        seq++;
+        last_plan.header.frame_id = ros::this_node::getName();
         
 		plan_publisher.publish(last_plan);
 	}

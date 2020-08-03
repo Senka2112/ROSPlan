@@ -10,6 +10,8 @@
 #include "rosplan_dispatch_msgs/PlanningService.h"
 #include "rosplan_dispatch_msgs/PlanAction.h"
 
+#include "rosplan_planning_system/PlannerOutput.h"
+
 /**
  * This file contains an interface to the planner.
  */

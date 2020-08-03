@@ -15,7 +15,7 @@ namespace KCL_rosplan {
 		// publishing raw planner output
 		std::string plannerTopic = "planner_output";
 		node_handle->getParam("planner_topic", plannerTopic);
-		plan_publisher = node_handle->advertise<std_msgs::String>(plannerTopic, 1, true);
+        plan_publisher = node_handle->advertise<rosplan_planning_system::PlannerOutput>(plannerTopic, 1, true);
 
 		// start planning action server
 		plan_server->start();

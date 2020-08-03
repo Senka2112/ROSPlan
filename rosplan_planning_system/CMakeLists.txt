@@ -17,6 +17,22 @@ find_package(catkin REQUIRED COMPONENTS
   rosplan_dependencies
   roslib
   rostest
+  message_generation
+)
+
+# Generate messages in the 'msg' folder
+add_message_files(
+   FILES
+   PlannerOutput.msg
+)
+
+
+## Generate added messages and services with any dependencies listed here
+generate_messages(
+   DEPENDENCIES
+   actionlib_msgs
+   diagnostic_msgs
+   std_msgs
 )
 
 ###################################
@@ -28,7 +44,7 @@ catkin_package(
   INCLUDE_DIRS include ${catkin_INCLUDE_DIRS}
   LIBRARIES rosplan_action_interface
   CATKIN_DEPENDS roscpp rospy actionlib std_msgs std_srvs diagnostic_msgs
-                 rosplan_dispatch_msgs rosplan_knowledge_msgs roslib rostest
+                 rosplan_dispatch_msgs rosplan_knowledge_msgs roslib rostest message_runtime
   DEPENDS
 )
 

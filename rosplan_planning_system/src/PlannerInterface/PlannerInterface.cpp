@@ -97,8 +97,12 @@ namespace KCL_rosplan {
 
 		// publish planner output
 		if(success) {
-			std_msgs::String planMsg;
-			planMsg.data = planner_output;
+            rosplan_planning_system::PlannerOutput planMsg;
+            planMsg.planner_output = planner_output;
+            planMsg.header.stamp = ros::Time::now();
+           // planMsg.header.seq = action_id;
+            planMsg.header.frame_id = ros::this_node::getName();
+
 			plan_publisher.publish(planMsg);
 		}
 

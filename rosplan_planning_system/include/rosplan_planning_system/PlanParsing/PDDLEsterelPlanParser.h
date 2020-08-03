@@ -181,6 +181,8 @@ namespace KCL_rosplan {
 		void preparePlan();
 		void publishPlan();
 
+                int seq;
+
 	public:
 
 		/* constructor */

@@ -47,6 +47,7 @@ namespace KCL_rosplan {
         if (as_.isActive()) { // Action server is the one dispatching
             rosplan_dispatch_msgs::NonBlockingDispatchFeedback afeedback;
             afeedback.feedback = fb;
+
             as_.publishFeedback(afeedback);
         }
         // Publish feedback in topic anyway...

@@ -45,6 +45,8 @@ namespace KCL_rosplan {
 		bool action_success;
 		bool action_cancelled;
 
+                int fb_seq;
+
 	public:
 
 		/* main loop for action interface */
