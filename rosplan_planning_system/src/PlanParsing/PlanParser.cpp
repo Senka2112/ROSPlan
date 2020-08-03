@@ -6,11 +6,11 @@ namespace KCL_rosplan {
 	/* Planner subscription */
 	/*----------------------*/
 
-	void PlanParser::plannerCallback(const std_msgs::String& plannerOutput) {
+    void PlanParser::plannerCallback(const rosplan_planning_system::PlannerOutput& plannerOutput) {
 		ROS_INFO("KCL: (%s) Planner output received.", ros::this_node::getName().c_str());
 		planner_output_received = true;
 		planner_output_time = ros::Time::now().toSec();
-		planner_output = plannerOutput.data;
+        planner_output = plannerOutput.planner_output;
 	}
 
 	/*-------------------*/

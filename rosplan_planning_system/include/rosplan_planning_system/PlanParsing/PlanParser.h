@@ -10,6 +10,7 @@
 #include "std_srvs/Empty.h"
 #include "rosplan_dispatch_msgs/ParsingService.h"
 #include "rosplan_dispatch_msgs/ActionDispatch.h"
+#include "rosplan_planning_system/PlannerOutput.h"
 
 #ifndef KCL_plan_parser
 #define KCL_plan_parser
@@ -37,7 +38,7 @@ namespace KCL_rosplan {
 
 	public:
 
-		void plannerCallback(const std_msgs::String& plannerOutput);
+                void plannerCallback(const rosplan_planning_system::PlannerOutput& plannerOutput);
 
 		bool parsePlanFromFile(rosplan_dispatch_msgs::ParsingService::Request &req, rosplan_dispatch_msgs::ParsingService::Response &res);
 		bool parsePlan(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
