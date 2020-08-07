@@ -61,6 +61,8 @@ namespace KCL_rosplan {
         ros::ServiceServer stateServer5; // getGoals
         ros::ServiceServer stateServer6; // getMetric
 
+        int status_update_seq;
+
 	protected:
     
         ros::Publisher status_pub;

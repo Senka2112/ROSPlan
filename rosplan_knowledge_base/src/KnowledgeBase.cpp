@@ -197,12 +197,22 @@ namespace KCL_rosplan {
 
 			updateKnowledge(srv.request, srv.response);
 			res.success = res.success && srv.response.success;
-		}       
+        }
+
+
 
         rosplan_knowledge_msgs::StatusUpdate update_msg;
+
+        update_msg.header.stamp = ros::Time::now();
+        update_msg.header.frame_id = ros::this_node::getName();
+        update_msg.header.seq = status_update_seq;
+        update_msg.header.frame_id = event.getCallerName();
+
         update_msg.last_update_time = ros::Time::now();
         update_msg.last_update_client = event.getConnectionHeader()["callerid"];
         status_pub.publish(update_msg);
+
+        status_update_seq++;
 
 		return true;
 	}
@@ -573,7 +583,9 @@ namespace KCL_rosplan {
     }
 
     KnowledgeBase::KnowledgeBase(ros::NodeHandle& n) {
-		_nh = n;
+        _nh = n;
+
+        status_update_seq = 0;
 
 		// Start all the servers
 		// fetch domain info
