@@ -20,6 +20,8 @@ namespace KCL_rosplan {
 
 		// start planning action server
 		plan_server->start();
+
+        planner_output_seq = 0;
 	}
 
 	SMTPlannerInterface::~SMTPlannerInterface()

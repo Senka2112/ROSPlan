@@ -16,12 +16,15 @@
 #include "rosplan_planning_system/PlannerInterface/PlannerInterface.h"
 #include "rosplan_dispatch_msgs/PlanningService.h"
 
+#include "rosplan_planning_system/PlannerOutput.h"
+#include "rosplan_planning_system/ProblemInstance.h"
+
 bool plan_received;
 std::string last_plan;
 
-void testCallback(const std_msgs::String::ConstPtr &plan) {
-    ROS_INFO("I heard: [%s]", plan->data.c_str());
-    last_plan = plan->data;
+void testCallback(const rosplan_planning_system::PlannerOutput::ConstPtr &plan) {
+    ROS_INFO("I heard: [%s]", plan->planner_output.c_str());
+    last_plan = plan->planner_output;
     plan_received = true;
 }
 
@@ -54,8 +57,8 @@ GTEST_TEST(PlannerInterfaceTests, Test2_format_published_on_planner_output) {
 
     ros::NodeHandle nh("~");
 
-    ros::Subscriber sub = nh.subscribe<std_msgs::String>("/rosplan_planner_interface/planner_output", 1000, &testCallback);
-    ros::Publisher pub = nh.advertise<std_msgs::String>("/rosplan_problem_interface/problem_instance", 1000);
+    ros::Subscriber sub = nh.subscribe<rosplan_planning_system::PlannerOutput>("/rosplan_planner_interface/planner_output", 1000, &testCallback);
+    ros::Publisher pub = nh.advertise<rosplan_planning_system::ProblemInstance>("/rosplan_problem_interface/problem_instance", 1000);
 
     std::string srv_name = "/rosplan_planner_interface/planning_server_params";
     ros::ServiceClient client1 = nh.serviceClient<rosplan_dispatch_msgs::PlanningService>(srv_name);

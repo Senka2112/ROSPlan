@@ -23,6 +23,9 @@ namespace KCL_rosplan {
         plan_server->start();
         planner_running = false;
         get_planner_params = nh.advertiseService("get_planning_params", &KCL_rosplan::OnlinePlannerInterface::getPlannerParams, this);
+
+        planner_output_seq = 0;
+
     }
 
     OnlinePlannerInterface::~OnlinePlannerInterface() {

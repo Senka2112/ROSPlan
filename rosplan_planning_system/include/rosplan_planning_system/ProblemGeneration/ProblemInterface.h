@@ -7,6 +7,8 @@
 
 #include "rosplan_dispatch_msgs/ProblemService.h"
 
+#include "rosplan_planning_system/ProblemInstance.h"
+
 #ifndef KCL_problem_interface
 #define KCL_problem_interface
 
@@ -26,6 +28,7 @@ namespace KCL_rosplan {
 		std::string problem_name;
 
 		ProblemGeneratorPtr problem_generator;
+                int problem_instance_seq;
 
 	public:
 

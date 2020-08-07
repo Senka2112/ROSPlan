@@ -20,6 +20,9 @@ namespace KCL_rosplan {
 
 		node_handle->param<bool>("use_ffha", this->use_ffha, false);
 
+
+        planner_output_seq = 0;
+
 		// start planning action server
 		plan_server->start();
 	}

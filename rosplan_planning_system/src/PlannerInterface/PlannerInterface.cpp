@@ -6,11 +6,11 @@ namespace KCL_rosplan {
 	/* Problem subscription */
 	/*----------------------*/
 
-	void PlannerInterface::problemCallback(const std_msgs::String& problemInstance) {
+    void PlannerInterface::problemCallback(const rosplan_planning_system::ProblemInstance& problemInstance) {
 		ROS_INFO("KCL: (%s) Problem received.", ros::this_node::getName().c_str());
 		problem_instance_received = true;
 		problem_instance_time = ros::WallTime::now().toSec();
-		problem_instance = problemInstance.data;
+		problem_instance = problemInstance.problem_instance;
 	}
 
 	/*--------------------*/
@@ -100,9 +100,11 @@ namespace KCL_rosplan {
             rosplan_planning_system::PlannerOutput planMsg;
             planMsg.planner_output = planner_output;
             planMsg.header.stamp = ros::Time::now();
-           // planMsg.header.seq = action_id;
+            planMsg.header.seq =  planner_output_seq;
             planMsg.header.frame_id = ros::this_node::getName();
 
+
+            planner_output_seq++;
 			plan_publisher.publish(planMsg);
 		}
 

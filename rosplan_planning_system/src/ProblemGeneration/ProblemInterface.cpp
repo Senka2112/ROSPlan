@@ -62,7 +62,7 @@ namespace KCL_rosplan {
 		// publishing "problem"
 		std::string problem_instance = "problem_instance";
 		node_handle->getParam("problem_topic", problem_instance);
-		problem_publisher = node_handle->advertise<std_msgs::String>(problem_instance, 1, true);
+        problem_publisher = node_handle->advertise<rosplan_planning_system::ProblemInstance>(problem_instance, 1, true);
 	}
 
 	ProblemInterface::~ProblemInterface()
@@ -132,9 +132,15 @@ namespace KCL_rosplan {
 		// publish problem
 		std::ifstream problemIn(problem_path.c_str());
 		if(problemIn) {
-			std_msgs::String problemMsg;
-			problemMsg.data = std::string(std::istreambuf_iterator<char>(problemIn), std::istreambuf_iterator<char>());
-			problem_publisher.publish(problemMsg);
+            rosplan_planning_system::ProblemInstance problemMsg;
+            problemMsg.problem_instance = std::string(std::istreambuf_iterator<char>(problemIn), std::istreambuf_iterator<char>());
+
+            problemMsg.header.stamp = ros::Time::now();
+            problemMsg.header.seq =  problem_instance_seq;
+            problemMsg.header.frame_id = ros::this_node::getName();
+
+            problem_instance_seq++;
+            problem_publisher.publish(problemMsg);
 		}
 
 		return true;

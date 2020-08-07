@@ -12,6 +12,8 @@
 
 #include "rosplan_planning_system/PlannerOutput.h"
 
+#include "rosplan_planning_system/ProblemInstance.h"
+
 /**
  * This file contains an interface to the planner.
  */
@@ -36,6 +38,7 @@ namespace KCL_rosplan {
 
 		/* planner outputs */
 		std::string planner_output;
+                int planner_output_seq;
 
 		/* problem subscription */
 		std::string problem_instance;
@@ -47,7 +50,7 @@ namespace KCL_rosplan {
 
 	public:
 
-		void problemCallback(const std_msgs::String& problemInstance);
+                void problemCallback(const rosplan_planning_system::ProblemInstance& problemInstance);
 
 		bool runPlanningServerDefault(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
 		bool runPlanningServerParams(rosplan_dispatch_msgs::PlanningService::Request &req, rosplan_dispatch_msgs::PlanningService::Response &res);

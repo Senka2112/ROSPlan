@@ -17,13 +17,15 @@
 #include "rosplan_planning_system/ProblemGeneration/ProblemGenerator.h"
 #include "rosplan_dispatch_msgs/ProblemService.h"
 
+#include "rosplan_planning_system/ProblemInstance.h"
+
 bool problem_received;
 std::string last_problem;
 
-void testCallback(const std_msgs::String::ConstPtr &problem) {
+void testCallback(const rosplan_planning_system::ProblemInstance::ConstPtr &problem) {
     std::cout << "here-problem" << std::endl;
-    ROS_INFO("I heard: [%s]", problem->data.c_str());
-    last_problem = problem->data;
+    ROS_INFO("I heard: [%s]", problem->problem_instance.c_str());
+    last_problem = problem->problem_instance;
     problem_received = true;
 }
 
